@@ -99,14 +99,6 @@ transaction-events.force-disable-internal-project: true
 # github-app.webhook-secret: 'GITHUB_WEBHOOK_SECRET' # Use only if configured in GitHub
 # github-app.client-id: 'GITHUB_CLIENT_ID'
 # github-app.client-secret: 'GITHUB_CLIENT_SECRET'
-# github-app.private-key: |
-#   -----BEGIN RSA PRIVATE KEY-----
-#   privatekeyprivatekeyprivatekeyprivatekey
-#   privatekeyprivatekeyprivatekeyprivatekey
-#   privatekeyprivatekeyprivatekeyprivatekey
-#   privatekeyprivatekeyprivatekeyprivatekey
-#   privatekeyprivatekeyprivatekeyprivatekey
-#   -----END RSA PRIVATE KEY-----
 
 #####################
 # Slack Integration #
