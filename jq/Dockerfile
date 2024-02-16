@@ -8,4 +8,6 @@ RUN set -x \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
+USER sentry
+
 ENTRYPOINT ["jq"]

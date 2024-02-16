@@ -147,7 +147,8 @@ services:
         "max_wal_senders=1",
       ]
     environment:
-      POSTGRES_HOST_AUTH_METHOD: "trust"
+      POSTGRES_PASSWORD: ${SENTRY_DB_PASSWORD}
+      POSTGRES_INITDB_ARGS: "--auth-host=scram-sha-256 --auth-local=scram-sha-256"
     entrypoint: /opt/sentry/postgres-entrypoint.sh
     volumes:
       - "sentry-postgres:/var/lib/postgresql/data"
@@ -402,13 +403,17 @@ services:
   nginx:
     <<: *restart_policy
     ports:
-      - "$SENTRY_BIND:80/tcp"
+      - "$SENTRY_BIND:443/tcp"
     image: "nginx:1.25.2-alpine"
     volumes:
       - type: bind
         read_only: true
         source: ./nginx
         target: /etc/nginx
+      - type: bind
+        read_only: true
+        source: ./ssl
+        target: /etc/ssl
       - sentry-nginx-cache:/var/cache/nginx
     depends_on:
       - web
