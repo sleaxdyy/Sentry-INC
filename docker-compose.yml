@@ -77,7 +77,7 @@ x-sentry-defaults: &sentry_defaults
   volumes:
     - "sentry-data:/data"
     - "./sentry:/etc/sentry"
-    - "./geoip:/geoip:ro"
+      #- "./geoip:/geoip:ro"
     - "./certificates:/usr/local/share/ca-certificates:ro"
 x-snuba-defaults: &snuba_defaults
   <<: *restart_policy
@@ -243,14 +243,14 @@ services:
       interval: 10s
       timeout: 10s
       retries: 30
-  geoipupdate:
-    image: "ghcr.io/maxmind/geoipupdate:v6.0.0"
+      #geoipupdate:
+      #image: "ghcr.io/maxmind/geoipupdate:v6.0.0"
     # Override the entrypoint in order to avoid using envvars for config.
     # Futz with settings so we can keep mmdb and conf in same dir on host
     # (image looks for them in separate dirs by default).
-    entrypoint: ["/usr/bin/geoipupdate", "-d", "/sentry", "-f", "/sentry/GeoIP.conf"]
-    volumes:
-      - "./geoip:/sentry"
+    #entrypoint: ["/usr/bin/geoipupdate", "-d", "/sentry", "-f", "/sentry/GeoIP.conf"]
+    #volumes:
+    #- "./geoip:/sentry"
   snuba-api:
     <<: *snuba_defaults
   # Kafka consumer responsible for feeding events into Clickhouse
@@ -426,10 +426,10 @@ services:
         read_only: true
         source: ./relay
         target: /work/.relay
-      - type: bind
-        read_only: true
-        source: ./geoip
-        target: /geoip
+        #- type: bind
+        #read_only: true
+        #source: ./geoip
+        #target: /geoip
     depends_on:
       kafka:
         <<: *depends_on-healthy

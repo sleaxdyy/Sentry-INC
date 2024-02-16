@@ -6,7 +6,7 @@ echo "${_group}Fetching and updating Docker images ..."
 # stderr>stdout redirection below and pass it through grep, ignoring all lines
 # having this '-onpremise-local' suffix.
 
-$dc pull -q --ignore-pull-failures 2>&1 | grep -v -- -self-hosted-local || true
+#$dc pull -q --ignore-pull-failures 2>&1 | grep -v -- -self-hosted-local || true
 
 # We may not have the set image on the repo (local images) so allow fails
 docker pull ${SENTRY_IMAGE} || true
